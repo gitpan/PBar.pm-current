@@ -1,0 +1,22 @@
+#!perl
+
+use Mac::Apps::PBar;
+
+$bar = Mac::Apps::PBar->new('Progress Bar', '50, 50');
+$bar->data(Cap1, 'downloading BigFile.tar.gz');
+$bar->data(Cap2, 'file size 1,230K');
+$bar->data(MinV, '0');
+$bar->data(MaxV, '1230');
+for(1..10) {
+    sleep(1);
+    $n = $_*123;
+    $m = 1230 - $n; 
+    $bar->data(Valu, $n);
+    if($m) {
+        $bar->data('Cap2', "remaining $m") 
+    } else {
+        $bar->data('Cap2', 'finished')
+    }
+}
+sleep(5);
+$bar->close_window;
